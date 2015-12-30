@@ -6,7 +6,8 @@
         "psr-0": { "LSOFT\\AdBundle": "" }
     },
     "require": {
-        "symfony/symfony": "~2.*"
+        "symfony/symfony": "~2.*",
+        "sonata-project/admin-bundle": "^2.3"
     },
     "target-dir": "Lsoft/AdBundle"
 }
