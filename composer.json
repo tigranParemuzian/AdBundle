@@ -1,0 +1,12 @@
+{
+    "name": "lsoft/ad-bundle",
+    "type": "symfony-bundle",
+    "license": "LSOFT",
+    "autoload": {
+        "psr-0": { "LSOFT\\AdBundle": "" }
+    },
+    "require": {
+        "symfony/symfony": "~2.*"
+    },
+    "target-dir": "Lsoft/AdBundle"
+}

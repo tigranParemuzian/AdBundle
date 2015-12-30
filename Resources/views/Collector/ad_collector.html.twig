@@ -1,0 +1,94 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    {% set ads = collector.adsData %}
+    {% set icon %}
+        {% set warning = false %}
+        {% for ad in ads %}
+            {% if ad.ad == false and ad.zone != null and ad.domain != null %}
+                {% set warning = true %}
+            {% endif %}
+        {% endfor %}
+     {#this is the content displayed as a panel in the toolbar #}
+    <span class="icon"><img src="/bundles/ad/images/ad_banner-512.png" alt="" style="width: 26px;
+        {% if warning == false %} background-color: #5e8014;
+        {% else %} background-color: rgb(255, 204, 0);
+        {% endif %}
+                "/></span>
+    <span class="sf-toolbar-status">Ads</span>
+    {% endset %}
+    {% set text %}
+        {% spaceless %}
+            {% for ad in ads %}
+            <div class="sf-toolbar-info-piece">
+                {% if ad.ad != false %}
+                <b>{{ ad.ad.name }}</b>
+                    {% else %}
+                <b style="background-color:rgb(255, 204, 0) ">Ad name is missing</b>
+                {% endif %}
+
+                <span class="sf-toolbar-status ">{{ ad.zone }}</span>
+            </div>
+            {% endfor %}
+        {% endspaceless %}
+    {% endset %}
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: true }) }}
+{% endblock %}
+
+{% block menu %}
+    {% set ads = collector.adsData %}
+    {% set warning = false %}
+    {% for ad in ads %}
+        {% if ad.ad == false and ad.zone != null and ad.domain != null %}
+            {% set warning = true %}
+        {% endif %}
+    {% endfor %}
+    <span class="label">
+        <span class="icon"><img src="/bundles/lsoftad/images/ad_banner-512.png" alt="" style="width: 30px;
+            {% if warning == false %} background-color: #5e8014;
+            {% else %} background-color: rgb(255, 204, 0);
+        {% endif %}"/></span>
+    <strong>Ads</strong>
+</span>
+{% endblock %}
+
+{% block panel %}
+    {% set ads = collector.adsData %}
+    {% set warning = false %}
+    {% for ad in ads %}
+        {% if ad.ad == false and ad.zone != null and ad.domain != null %}
+            {% set warning = true %}
+        {% endif %}
+    {% endfor %}
+    {% for ad in ads %}
+        {% if ad.ad != false %}
+        <h2>Ad {{ ad.ad.name }} </h2>
+        {% else %}
+            <h2 style="{% if warning == false %} background-color: #5e8014;
+            {% else %} background-color: rgb(255, 204, 0);
+        {% endif %}">Ad not found </h2>
+        {% endif %}
+            {% if ad.domain %}
+                <p> Ad Domain
+                    <em>{{ ad.domain }}</em>
+                </p>
+            {% else %}
+                <p>
+                    <em>domain not found</em>
+                </p>
+            {% endif %}
+
+            {% if ad.zone %}
+                <p> Ad Zone
+                    <em>{{ ad.zone }}</em>
+                </p>
+            {% else %}
+                <p>
+                    <em>zone not found</em>
+                </p>
+            {% endif %}
+
+    {% endfor %}
+
+
+{% endblock %}

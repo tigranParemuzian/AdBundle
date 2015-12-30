@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <services>
+        <!-- Ad -->
+        <service id="ad.admin.ad" class="LsoftAdBundle\Admin\AdAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="LsoftAdBundle" label="Ad"/>
+            <argument/>
+            <argument>LsoftAdBundle\Entity\Ad</argument>
+            <argument>NULL</argument>
+        </service>
+
+        <!-- Ad domain -->
+        <service id="ad.admin.domain" class="LsoftAdBundle\Admin\DomainAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="LsoftAdBundle" label="Domain"/>
+            <argument/>
+            <argument>LsoftAdBundle\Entity\Domain</argument>
+            <argument>NULL</argument>
+        </service>
+
+        <!-- Ad provider -->
+        <service id="ad.admin.ads.provider" class="LsoftAdBundle\Admin\AdsProviderAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="LsoftAdBundle" label="Ads Provider"/>
+            <argument/>
+            <argument>LsoftAdBundle\Entity\AdsProvider</argument>
+            <argument>NULL</argument>
+        </service>
+
+        <service id="data_collector.ad_collector" class="LsoftAdBundle\Controller\AdDataCollector">
+            <tag name="data_collector" template="LsoftAdBundle:Collector:ad_collector.html.twig" id="ad_collector"  priority="300" />
+        </service>
+    </services>
+
+</container>
