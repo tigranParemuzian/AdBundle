@@ -7,7 +7,7 @@
  * Time: 7:42 PM
  */
 
-namespace LSoftAdBundle\Entity\Repository;
+namespace LSoft\AdBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

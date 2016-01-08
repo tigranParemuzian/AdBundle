@@ -1,6 +1,6 @@
 <?php
 
-namespace LSoftAdBundle\DependencyInjection;
+namespace LSoft\AdBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

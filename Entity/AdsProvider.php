@@ -1,10 +1,9 @@
 <?php
 
-namespace LSoftAdBundle\Entity;
+namespace LSoft\AdBundle\Entity;
 
-use LsoftAdBundle\Admin\AdsProviderAdmin;
 use Doctrine\ORM\Mapping as ORM;
-use LsoftAdBundle\Entity\Ad;
+use Lsoft\AdBundle\Entity\Ad;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -14,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class AdsProvider
  *
  *
- * @package LSoftAdBundle\Entity
+ * @package LSoft\AdBundle\Entity
  */
 class AdsProvider
 {
@@ -62,11 +61,11 @@ class AdsProvider
     /**
      * Set ad
      *
-     * @param \LSoftAdBundle\Entity\Ad $ad
+     * @param Ad $ad
      *
      * @return AdsProvider
      */
-    public function setAd(\LSoftAdBundle\Entity\Ad $ad = null)
+    public function setAd(Ad $ad = null)
     {
         $this->ad = $ad;
 
@@ -76,7 +75,7 @@ class AdsProvider
     /**
      * Get ad
      *
-     * @return \LSoftAdBundle\Entity\Ad
+     * @return Ad
      */
     public function getAd()
     {

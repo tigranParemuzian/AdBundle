@@ -1,6 +1,6 @@
 <?php
 
-namespace LSoftAdBundle\Tests\Controller;
+namespace LSoft\AdBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

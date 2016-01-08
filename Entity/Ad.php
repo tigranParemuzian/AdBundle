@@ -1,6 +1,6 @@
 <?php
 
-namespace LSoftAdBundle\Entity;
+namespace LSoft\AdBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -11,9 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Ad
- * @package LSoftAdBundle\Entity
+ * @package LSoft\AdBundle\Entity
  *
- * @ORM\Entity(repositoryClass="LSoftAdBundle\Entity\Repository\AdRepository")
+ * @ORM\Entity(repositoryClass="LSoft\AdBundle\Entity\Repository\AdRepository")
  * @ORM\Table(name="ad_ads")
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("code", message="code.duplicate")
