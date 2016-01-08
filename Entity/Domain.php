@@ -1,6 +1,6 @@
 <?php
 
-namespace LsoftAdBundle\Entity;
+namespace LSoftAdBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Domain
  *
  *
- * @package LsoftAdBundle\Entity
+ * @package LSoftAdBundle\Entity
  */
 class Domain
 {

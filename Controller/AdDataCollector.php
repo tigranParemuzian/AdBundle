@@ -6,7 +6,7 @@
  * Time: 11:20 AM
  */
 
-namespace LsoftAdBundle\Controller;
+namespace LSoftAdBundle\Controller;
 
 
 use Symfony\Component\HttpFoundation\Request;

@@ -1,6 +1,6 @@
 <?php
 
-namespace LsoftAdBundle\Entity;
+namespace LSoftAdBundle\Entity;
 
 use LsoftAdBundle\Admin\AdsProviderAdmin;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class AdsProvider
  *
  *
- * @package LsoftAdBundle\Entity
+ * @package LSoftAdBundle\Entity
  */
 class AdsProvider
 {
@@ -62,11 +62,11 @@ class AdsProvider
     /**
      * Set ad
      *
-     * @param \LsoftAdBundle\Entity\Ad $ad
+     * @param \LSoftAdBundle\Entity\Ad $ad
      *
      * @return AdsProvider
      */
-    public function setAd(\LsoftAdBundle\Entity\Ad $ad = null)
+    public function setAd(\LSoftAdBundle\Entity\Ad $ad = null)
     {
         $this->ad = $ad;
 
@@ -76,7 +76,7 @@ class AdsProvider
     /**
      * Get ad
      *
-     * @return \LsoftAdBundle\Entity\Ad
+     * @return \LSoftAdBundle\Entity\Ad
      */
     public function getAd()
     {
@@ -94,11 +94,11 @@ class AdsProvider
     /**
      * Add domain
      *
-     * @param \LsoftAdBundle\Entity\Domain $domain
+     * @param Domain $domain
      *
      * @return AdsProvider
      */
-    public function addDomain(\LsoftAdBundle\Entity\Domain $domain)
+    public function addDomain(Domain $domain)
     {
         $this->domain[] = $domain;
 
@@ -108,9 +108,9 @@ class AdsProvider
     /**
      * Remove domain
      *
-     * @param \LsoftAdBundle\Entity\Domain $domain
+     * @param Domain $domain
      */
-    public function removeDomain(\LsoftAdBundle\Entity\Domain $domain)
+    public function removeDomain(Domain $domain)
     {
         $this->domain->removeElement($domain);
     }

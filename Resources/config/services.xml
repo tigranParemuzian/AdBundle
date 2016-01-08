@@ -7,31 +7,31 @@
 
     <services>
         <!-- Ad -->
-        <service id="ad.admin.ad" class="LsoftAdBundle\Admin\AdAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="LsoftAdBundle" label="Ad"/>
+        <service id="ad.admin.ad" class="LSoftAdBundle\Admin\AdAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="LSoftAdBundle" label="Ad"/>
             <argument/>
-            <argument>LsoftAdBundle\Entity\Ad</argument>
+            <argument>LSoftAdBundle\Entity\Ad</argument>
             <argument>NULL</argument>
         </service>
 
         <!-- Ad domain -->
-        <service id="ad.admin.domain" class="LsoftAdBundle\Admin\DomainAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="LsoftAdBundle" label="Domain"/>
+        <service id="ad.admin.domain" class="LSoftAdBundle\Admin\DomainAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="LSoftAdBundle" label="Domain"/>
             <argument/>
-            <argument>LsoftAdBundle\Entity\Domain</argument>
+            <argument>LSoftAdBundle\Entity\Domain</argument>
             <argument>NULL</argument>
         </service>
 
         <!-- Ad provider -->
-        <service id="ad.admin.ads.provider" class="LsoftAdBundle\Admin\AdsProviderAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="LsoftAdBundle" label="Ads Provider"/>
+        <service id="ad.admin.ads.provider" class="LSoftAdBundle\Admin\AdsProviderAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="LSoftAdBundle" label="Ads Provider"/>
             <argument/>
-            <argument>LsoftAdBundle\Entity\AdsProvider</argument>
+            <argument>LSoftAdBundle\Entity\AdsProvider</argument>
             <argument>NULL</argument>
         </service>
 
-        <service id="data_collector.ad_collector" class="LsoftAdBundle\Controller\AdDataCollector">
-            <tag name="data_collector" template="LsoftAdBundle:Collector:ad_collector.html.twig" id="ad_collector"  priority="300" />
+        <service id="data_collector.ad_collector" class="LSoftAdBundle\Controller\AdDataCollector">
+            <tag name="data_collector" template="LSoftAdBundle:Collector:ad_collector.html.twig" id="ad_collector"  priority="300" />
         </service>
     </services>
 

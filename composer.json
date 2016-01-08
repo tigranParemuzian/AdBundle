@@ -1,13 +1,13 @@
 {
     "name": "lsoft/ad-bundle",
     "type": "symfony-bundle",
-    "license": "LSOFT",
+    "license": "MIT",
     "autoload": {
-        "psr-0": { "LSOFT\\AdBundle": "" }
+        "psr-0": { "LSoft\\AdBundle": "" }
     },
     "require": {
         "symfony/symfony": "~2.7",
         "sonata-project/admin-bundle": "~2.3"
     },
-    "target-dir": "Lsoft/AdBundle"
+    "target-dir": "LSoft/AdBundle"
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Lsoft\AdBundle;
+namespace LSoft\AdBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class LsoftAdBundle extends Bundle
+class LSoftAdBundle extends Bundle
 {
 }

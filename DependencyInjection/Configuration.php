@@ -1,6 +1,6 @@
 <?php
 
-namespace LsoftAdBundle\DependencyInjection;
+namespace LSoftAdBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

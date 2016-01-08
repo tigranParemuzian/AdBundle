@@ -1,6 +1,6 @@
 <?php
 
-namespace LsoftAdBundle\Entity;
+namespace LSoftAdBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -11,9 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Ad
- * @package LsoftAdBundle\Entity
+ * @package LSoftAdBundle\Entity
  *
- * @ORM\Entity(repositoryClass="LsoftAdBundle\Entity\Repository\AdRepository")
+ * @ORM\Entity(repositoryClass="LSoftAdBundle\Entity\Repository\AdRepository")
  * @ORM\Table(name="ad_ads")
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("code", message="code.duplicate")
@@ -109,15 +109,5 @@ class Ad
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * Override get path method from trait
-     *
-     * @return string
-     */
-    protected function getPath()
-    {
-        return 'ad_image';
     }
 }

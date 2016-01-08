@@ -6,9 +6,8 @@
  * Time: 10:48 AM
  */
 
-namespace LsoftAdBundle\Admin;
+namespace LSoftAdBundle\Admin;
 
-use LsoftAdBundle\Entity\Location;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -17,7 +16,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
  * Class AdAdmin
- * @package LsoftAdBundle\Admin
+ * @package LSoftAdBundle\Admin
  */
 class AdAdmin extends Admin
 {
