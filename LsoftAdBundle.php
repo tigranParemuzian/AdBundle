@@ -1,6 +1,6 @@
 <?php
 
-namespace Lsoft\MapBundle;
+namespace Lsoft\AdBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
