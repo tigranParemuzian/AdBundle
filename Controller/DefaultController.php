@@ -37,7 +37,9 @@ class DefaultController extends Controller
                 // get ad manager
                 $ad = $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $zone);
                 // add data in apc timeout 1 day
-                $data = apc_add($key, $ad, $ttl);
+                apc_add($key, $ad, $ttl);
+
+                $data = apc_fetch($key);
             }
         }
         else
