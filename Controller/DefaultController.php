@@ -35,7 +35,7 @@ class DefaultController extends Controller
             if(!$data)
             {
                 // get ad manager
-                $ad = $em->getRepository("AdBundle:Ad")->findByAdsManager($domain, $zone);
+                $ad = $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $zone);
                 // add data in apc timeout 1 day
                 $data = apc_add($key, $ad, $ttl);
             }
@@ -43,7 +43,7 @@ class DefaultController extends Controller
         else
         {
             // if cache not exist get data
-            $data = $em->getRepository("AdBundle:Ad")->findByAdsManager($domain, $zone);
+            $data = $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $zone);
         }
 
         // set data for profiler

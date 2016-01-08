@@ -7,7 +7,7 @@ Ad widget for sonata admin.
 
 Add NotificationBundle in your composer.json:
 
-```js
+```json
 {
     "require": {
         "lsoft/ad-bundle": "dev-master",
@@ -31,8 +31,30 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Lsoft\AdBundle\LsoftAdBundleBundle(),
+        new LSoft\AdBundle\LSoftAdBundle(),
     );
 }
+```
+
+### Step 3: Enable the admin service
+
+Config the bundle in the config.yml:
+
+``` yml
+# app/config/config.yml
+imports:
+    # ...
+    - { resource: @LSoftAdBundle/Resources/config/services.xml }
+```
+
+### Step 4: Enable the in twig
+
+Enable the bundle in the twig:
+
+``` twig
+# MyBundle/Resources/views/myTwig.html.twig
+
+ {{ render(controller('LSoftAdBundle:Default:index', { 'domain': 'domain', 'zone': 'top' })) }}
+
 ```
 
