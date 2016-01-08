@@ -1,0 +1,4 @@
+lsoft_ads:
+    resource: "@LSoftAdBundle/Controller/"
+    type:     annotation
+    prefix:   /
