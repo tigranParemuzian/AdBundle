@@ -1,6 +1,7 @@
 {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
 
 {% block toolbar %}
+    {% set count = collector.adsData|length %}
     {% set ads = collector.adsData %}
     {% set icon %}
         {% set warning = false %}
@@ -10,12 +11,10 @@
             {% endif %}
         {% endfor %}
      {#this is the content displayed as a panel in the toolbar #}
-    <span class="icon"><img src="/bundles/ad/images/ad_banner-512.png" alt="" style="width: 26px;
-        {% if warning == false %} background-color: #5e8014;
-        {% else %} background-color: rgb(255, 204, 0);
-        {% endif %}
-                "/></span>
-    <span class="sf-toolbar-status">Ads</span>
+    <span class="icon"><img src="/bundles/ad/images/ad_banner-512.png" alt="" style="width: 26px; border-radius: 8px "/></span>
+    <span class="sf-toolbar-status" style="{% if warning == false %} background-color: #5e8014; color: #fff;
+        {% else %} background-color: rgb(255, 204, 0); color: #000;
+        {% endif %}">{{ count }}</span>
     {% endset %}
     {% set text %}
         {% spaceless %}
@@ -24,7 +23,7 @@
                 {% if ad.ad != false %}
                 <b>{{ ad.ad.name }}</b>
                     {% else %}
-                <b style="background-color:rgb(255, 204, 0) ">Ad name is missing</b>
+                <b style="background-color:rgb(255, 204, 0);  border-radius: 4px;">Ad name is missing</b>
                 {% endif %}
 
                 <span class="sf-toolbar-status ">{{ ad.zone }}</span>
@@ -36,6 +35,7 @@
 {% endblock %}
 
 {% block menu %}
+    {% set count = collector.adsData|length %}
     {% set ads = collector.adsData %}
     {% set warning = false %}
     {% for ad in ads %}
@@ -44,11 +44,12 @@
         {% endif %}
     {% endfor %}
     <span class="label">
-        <span class="icon"><img src="/bundles/ad/images/ad_banner-512.png" alt="" style="width: 30px;
-            {% if warning == false %} background-color: #5e8014;
-            {% else %} background-color: rgb(255, 204, 0);
-        {% endif %}"/></span>
-    <strong>Ads</strong>
+        <span class="icon"><img src="/bundles/ad/images/ad_banner-512.png" alt=""
+                                style="width: 30px; border-radius: 8px;"/></span>
+        <strong>Ads</strong>
+            <span class="count">
+                <span>{{ count }}</span>
+            </span>
 </span>
 {% endblock %}
 
@@ -60,35 +61,33 @@
             {% set warning = true %}
         {% endif %}
     {% endfor %}
-    {% for ad in ads %}
-        {% if ad.ad != false %}
-        <h2>Ad {{ ad.ad.name }} </h2>
-        {% else %}
-            <h2 style="{% if warning == false %} background-color: #5e8014;
-            {% else %} background-color: rgb(255, 204, 0);
-        {% endif %}">Ad not found </h2>
-        {% endif %}
-            {% if ad.domain %}
-                <p> Ad Domain
-                    <em>{{ ad.domain }}</em>
-                </p>
+    <h2> ADS </h2>
+
+    <ul class="alt">
+        {% for ad in ads %}
+            <li style="margin-bottom: 1px; {% if ad.ad != false %}background: #f1f7e2; {% else %} background-color: #ffcc00 {% endif %}">
+
+            {% if ad.ad != false %}
+                    <strong>{{ad.ad.name }}</strong>
             {% else %}
-                <p>
-                    <em>domain not found</em>
-                </p>
-            {% endif %}
+                <strong>Ad not found </strong>
+            {% endif %},
+            {% if ad.domain %}
+                <strong> Ad Domain  </strong>
+                    <em>{{ ad.domain }}</em>
+            {% else %}
+                <strong>Ad Domain </strong>
+                    <em> not found</em>
+            {% endif %},
 
             {% if ad.zone %}
-                <p> Ad Zone
+                <strong> Ad Zone</strong>
                     <em>{{ ad.zone }}</em>
-                </p>
             {% else %}
-                <p>
-                    <em>zone not found</em>
-                </p>
+                <strong> Ad Zone </strong>
+                    <em>not found</em>
             {% endif %}
-
-    {% endfor %}
-
-
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
