@@ -43,7 +43,7 @@ Config the bundle in the config.yml:
 ``` yml
 # app/config/config.yml
 l_soft_ad:
-    pattern: pattern of apc(string)
+    pattern: pattern of apc cache (string)
     lifetime: apc cache lifetime (int)
 ```
 
