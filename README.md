@@ -42,12 +42,26 @@ Config the bundle in the config.yml:
 
 ``` yml
 # app/config/config.yml
-imports:
-    # ...
-    - { resource: @LSoftAdBundle/Resources/config/services.xml }
+l_soft_ad:
+    pattern: pattern of apc(string)
+    lifetime: apc cache lifetime (int)
 ```
 
-### Step 4: Enable the in twig
+### Step 4: Update database
+
+Enable the bundle in the twig:
+
+``` cmd
+$ php app/console doctrine:schema:update --force
+
+```
+
+### Step 5: Create Ad use sonata admin
+
+Open sonata admin find LSoft Ad group and create Ad, Domain and Ads provider
+
+
+### Step 6: Enable the in twig
 
 Enable the bundle in the twig:
 

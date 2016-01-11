@@ -69,4 +69,22 @@ class AdAdmin extends Admin
             ->add('codes')
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function postPersist($object)
+    {
+        $container = $this->getConfigurationPool()->getContainer();
+        $container->get('lsoft.ads.check_data')->updateApc($object);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function postUpdate($object)
+    {
+        $container = $this->getConfigurationPool()->getContainer();
+        $container->get('lsoft.ads.check_data')->updateApc($object);
+    }
 }

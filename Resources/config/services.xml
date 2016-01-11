@@ -1,9 +1,8 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
         <!-- Ad -->
@@ -33,6 +32,12 @@
         <service id="data_collector.ad_collector" class="LSoft\AdBundle\Controller\AdDataCollector">
             <tag name="data_collector" template="LSoftAdBundle:Collector:ad_collector.html.twig" id="ad_collector"  priority="300" />
         </service>
+
+        <!-- Ads service -->
+        <service id="lsoft.ads.check_data" class="LSoft\AdBundle\Service\AdsDataProvider">
+            <argument type="service" id="service_container"/>
+        </service>
+
     </services>
 
 </container>

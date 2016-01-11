@@ -25,4 +25,32 @@ class AdRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
+    public function findParentById($id)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT ap, ads, d FROM LSoftAdBundle:AdsProvider ap
+                            LEFT JOIN ap.ad ads
+                            JOIN ap.domain d
+                          WHERE ads.id = :id
+                  ')
+            ->setParameter('id', $id)
+            ->getResult()
+            ;
+
+    }
+
+    public function findParentByDomain($id)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT ap, ads, d FROM LSoftAdBundle:AdsProvider ap
+                            LEFT JOIN ap.ad ads
+                            JOIN ap.domain d
+                          WHERE d.id = :id
+                  ')
+            ->setParameter('id', $id)
+            ->getResult()
+            ;
+
+    }
+
 }
