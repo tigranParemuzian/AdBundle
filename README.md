@@ -58,7 +58,8 @@ $ php app/console doctrine:schema:update --force
 
 ### Step 5: Create Ad use sonata admin
 
-Open sonata admin find LSoft Ad group and create Ad, Domain and Ads provider
+Open sonata admin find LSoft Ad group and create Ad, Domain and Ads provider.
+Domain is name of your page and zone is position of ad
 
 
 ### Step 6: Enable the in twig

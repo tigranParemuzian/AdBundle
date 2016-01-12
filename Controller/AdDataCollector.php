@@ -17,7 +17,7 @@ class AdDataCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        
+
     }
 
     /**
