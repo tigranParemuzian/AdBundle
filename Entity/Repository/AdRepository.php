@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: tigran
- * Date: 12/29/15
- * Time: 7:42 PM
- */
-
 namespace LSoft\AdBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;

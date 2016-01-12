@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aram
- * Date: 11/9/15
- * Time: 10:48 AM
- */
 
 namespace LSoft\AdBundle\Admin;
 
@@ -37,8 +31,8 @@ class AdAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('name')
-            ->add('code')
+            ->addIdentifier('name')
+            ->addIdentifier('code')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),

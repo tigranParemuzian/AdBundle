@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aram
- * Date: 11/9/15
- * Time: 10:48 AM
- */
 
 namespace LSoft\AdBundle\Admin;
 
@@ -39,9 +33,9 @@ class AdsProviderAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('domain')
-            ->add('ad')
-            ->add('zone')
+            ->addIdentifier('domain')
+            ->addIdentifier('ad')
+            ->addIdentifier('zone')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),

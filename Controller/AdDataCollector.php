@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: tigran
- * Date: 12/30/15
- * Time: 11:20 AM
- */
 
 namespace LSoft\AdBundle\Controller;
 
