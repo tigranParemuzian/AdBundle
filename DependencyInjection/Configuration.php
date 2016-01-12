@@ -19,7 +19,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('l_soft_ads');
-
+        // create configs
         $rootNode->children()
             ->scalarNode('pattern')->end()
             ->scalarNode('lifetime')->end();

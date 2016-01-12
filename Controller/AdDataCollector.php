@@ -17,6 +17,7 @@ class AdDataCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
+        
     }
 
     /**
@@ -38,7 +39,7 @@ class AdDataCollector extends DataCollector
     }
 
     /**
-     * create data for profiler
+     * create data for profiler data collector
      *
      * @param $domain
      * @param $zone
@@ -46,6 +47,6 @@ class AdDataCollector extends DataCollector
      */
     public function addData($domain, $zone, $data)
     {
-            $this->data[]= array('ad'=>$data, 'domain'=>$domain, 'zone'=>$zone);
+        $this->data[]= array('ad'=>$data, 'domain'=>$domain, 'zone'=>$zone);
     }
 }

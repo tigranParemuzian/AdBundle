@@ -6,6 +6,14 @@ use Doctrine\ORM\EntityRepository;
 
 class AdRepository extends EntityRepository
 {
+    /**
+     * This repository find ads by domain and zone
+     *
+     * @param $domain
+     * @param $zone
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function findByAdsManager($domain, $zone)
     {
         return $this->getEntityManager()
@@ -18,6 +26,12 @@ class AdRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
+    /**
+     * This repository find ads data by ad id
+     *
+     * @param $id
+     * @return array
+     */
     public function findParentById($id)
     {
         return $this->getEntityManager()
@@ -32,6 +46,12 @@ class AdRepository extends EntityRepository
 
     }
 
+    /**
+     * This repository find ads data by domain id
+     *
+     * @param $id
+     * @return array
+     */
     public function findParentByDomain($id)
     {
         return $this->getEntityManager()

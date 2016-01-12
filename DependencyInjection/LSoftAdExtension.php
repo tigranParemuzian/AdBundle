@@ -21,14 +21,15 @@ class LSoftAdExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
+        // load bundle default services
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
-
+        // load bundle default configs
         if (isset($config) && isset($config['pattern'])) {
             $container->setParameter($this->getAlias() . '.pattern', $config['pattern']);
         }
         else {
+            // if pattern in configs is missing set default pattern LSoft
             $baseUrl = 'LSoft';
             $container->setParameter($this->getAlias() . '.pattern', $baseUrl);
         }
@@ -37,7 +38,7 @@ class LSoftAdExtension extends Extension
             $container->setParameter($this->getAlias() . '.lifetime', $config['lifetime']);
         }
         else {
-
+            //if lifetime in config is missing add default lifetime 1 day
             $container->setParameter($this->getAlias() . '.lifetime', 86400);
         }
     }
