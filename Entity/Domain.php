@@ -25,7 +25,7 @@ class Domain
 
     /**
      * @ORM\ManyToMany(targetEntity="AdsProvider", inversedBy="domain", cascade={"persist"})
-     * @ORM\JoinColumn(name="domain_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="ad_domain_id", referencedColumnName="id")
      *
      */
     protected $adsProvider;

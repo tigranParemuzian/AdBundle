@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
@@ -36,7 +37,7 @@ class AdAdmin extends Admin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
-                    'delete' => array(),
+                    'delete' => array()
                 )
             ))
         ;

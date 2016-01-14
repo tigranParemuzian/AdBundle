@@ -3,9 +3,12 @@
 namespace LSoft\AdBundle\Service;
 
 use LSoft\AdBundle\Entity\Ad;
+use LSoft\AdBundle\Entity\AdAnalyticsProvider;
+use LSoft\AdBundle\Entity\AdsAnalytics;
 use LSoft\AdBundle\Entity\AdsProvider;
 use LSoft\AdBundle\Entity\Domain;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Class AdsService
@@ -28,6 +31,13 @@ class AdsDataProvider
         $this->container = $container;
     }
 
+    /**
+     * This function get data
+     *
+     * @param $domain
+     * @param $zone
+     * @return mixed
+     */
     public function checkData($domain, $zone)
     {
         // get entity manager
@@ -60,9 +70,17 @@ class AdsDataProvider
             $data = $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $zone);
         }
 
+        if($data != null)
+        {
+            $this->checkAnalytics($data->getId());
+        }
+
         return $data;
     }
 
+    /**
+     * @param $object
+     */
     public function updateApc($object)
     {
         // get entity manager
@@ -111,6 +129,13 @@ class AdsDataProvider
         }
     }
 
+    /**
+     * This function generate kay for apc cache
+     *
+     * @param $domain
+     * @param $zone
+     * @return string
+     */
     private function cretePattern($domain, $zone)
     {
         //get pattern from configs
@@ -121,6 +146,45 @@ class AdsDataProvider
         return $key;
     }
 
+    private function checkAnalytics($adId)
+    {
+        // get entity manager
+        $em = $this->container->get('doctrine')->getManager();
 
+        $adAnalytic = $em->getRepository('LSoftAdBundle:AdsAnalytics')->findOneByAdId($adId);
+
+        if(!$adAnalytic)
+        {
+            $adAnalytic = new  AdsAnalytics();
+            $adAnalytic->setAdId($adId);
+            $adAnalytic->setVisits(1);
+            $em->persist($adAnalytic);
+        }
+        else
+        {
+            $adAnalytic->setVisits($adAnalytic->getVisits() + 1);
+            $em->persist($adAnalytic);
+            $oldDate = date_timestamp_get($adAnalytic->getCreated());
+            $now = date_timestamp_get(new \DateTime('now'));
+
+            $timeStep = $now - $oldDate;
+            $timeStepConfig = $this->container->getParameter('l_soft_ad.analytics');
+
+            if($timeStepConfig != false && $timeStep > (int)$timeStepConfig)
+            {
+                    $ad = $em->getRepository('LSoftAdBundle:Ad')->find($adId);
+
+                    $adAnalyticsProvider = new AdAnalyticsProvider();
+
+                    $adAnalyticsProvider->setVisits($adAnalytic->getVisits());
+                    $adAnalyticsProvider->setAd($ad);
+
+                $em->persist($adAnalyticsProvider);
+                $em->remove($adAnalytic);
+            }
+        }
+
+        $em->flush();
+    }
 
 }

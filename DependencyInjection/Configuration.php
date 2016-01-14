@@ -22,7 +22,8 @@ class Configuration implements ConfigurationInterface
         // create configs
         $rootNode->children()
             ->scalarNode('pattern')->end()
-            ->scalarNode('lifetime')->end();
+            ->scalarNode('lifetime')->end()
+            ->scalarNode('analytics')->end();
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

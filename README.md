@@ -44,7 +44,8 @@ Config the bundle in the config.yml:
 # app/config/config.yml
 l_soft_ad:
     pattern: pattern of apc cache (string)
-    lifetime: apc cache lifetime (int)
+    lifetime: apc cache lifetime (seconds)
+    analytics: analytics calculate lifetime (seconds)
 ```
 
 ### Step 4: Update database

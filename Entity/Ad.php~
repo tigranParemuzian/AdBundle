@@ -116,45 +116,4 @@ class Ad
     {
         return $this->code;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->adAnalytics = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add adAnalytic
-     *
-     * @param \LSoft\AdBundle\Entity\AdAnalyticsProvider $adAnalytic
-     *
-     * @return Ad
-     */
-    public function addAdAnalytic(\LSoft\AdBundle\Entity\AdAnalyticsProvider $adAnalytic)
-    {
-        $this->adAnalytics[] = $adAnalytic;
-
-        return $this;
-    }
-
-    /**
-     * Remove adAnalytic
-     *
-     * @param \LSoft\AdBundle\Entity\AdAnalyticsProvider $adAnalytic
-     */
-    public function removeAdAnalytic(\LSoft\AdBundle\Entity\AdAnalyticsProvider $adAnalytic)
-    {
-        $this->adAnalytics->removeElement($adAnalytic);
-    }
-
-    /**
-     * Get adAnalytics
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAdAnalytics()
-    {
-        return $this->adAnalytics;
-    }
 }

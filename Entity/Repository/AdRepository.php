@@ -66,4 +66,35 @@ class AdRepository extends EntityRepository
 
     }
 
+    /**
+     * This repository find ads data for analytics
+     *
+     * @return array
+     */
+    public function findAnalytics($ads = null, $from=null, $to=null)
+    {
+        $query = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('ad')
+            ->from('LSoftAdBundle:Ad', 'ad')
+            ->where('ad.id IS NOT NULL')
+        ;
+
+        if($ads != null)
+        {
+            $query->andWhere('ad.id IN :ads_ids')
+            ->setParameter('ads_ids', $ads);
+        }
+        return $query->getQuery()->getResult();
+//        return $this->getEntityManager()
+//            ->createQuery('SELECT ad, adan  FROM LSoftAdBundle:Ad ad
+//                           LEFT JOIN ad.adAnalytics adan
+//                           WHERE ad.id IS NOT NULL
+//                           GROUP BY ad.id
+//                  ')
+//            ->getResult()
+//            ;
+
+    }
+
 }

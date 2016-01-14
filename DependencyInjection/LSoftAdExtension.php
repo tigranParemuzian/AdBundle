@@ -41,5 +41,13 @@ class LSoftAdExtension extends Extension
             //if lifetime in config is missing add default lifetime 1 day
             $container->setParameter($this->getAlias() . '.lifetime', 86400);
         }
+            // analytics part
+        if (isset($config) && isset($config['analytics']) && is_numeric($config['analytics'])) {
+            $container->setParameter($this->getAlias() . '.analytics', $config['analytics']);
+        }
+        else {
+            //if analytics in config is missing add default analytics false
+            $container->setParameter($this->getAlias() . '.analytics', false);
+        }
     }
 }
