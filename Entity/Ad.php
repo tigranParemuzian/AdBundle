@@ -14,7 +14,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @package LSoft\AdBundle\Entity
  *
  * @ORM\Entity(repositoryClass="LSoft\AdBundle\Entity\Repository\AdRepository")
- * @ORM\Table(name="ad_ads")
+ * @ORM\Table(name="ad_ads", indexes={
+ *           @ORM\Index(name="group_name", columns={"name"}),
+ *     })
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("code", message="code.duplicate")
  */

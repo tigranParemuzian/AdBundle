@@ -26,4 +26,15 @@ class AdAnalyticsProviderRepository extends EntityRepository
             ;
 
     }
+
+    public function inset()
+    {
+//        INSERT INTO `ad_analytics_provider`( `ad_id`, `created`, `updated`, `visits`) VALUES (1, now(), now(), 2)'
+        $query = $this->getEntityManager()
+            ->createQuery('INSERT INTO LSoftAdBundle:AdAnalyticsProvider ad ()
+
+							WHERE nt.link IN (:urls)')
+            ->setParameter('urls', $urls);
+        $query->execute();
+    }
 }

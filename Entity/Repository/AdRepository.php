@@ -14,16 +14,40 @@ class AdRepository extends EntityRepository
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findByAdsManager($domain, $zone)
+    public function findByAdsManager($domain, $zone, $kay = null, $livetime = null)
     {
-        return $this->getEntityManager()
-            ->createQuery('SELECT a FROM LSoftAdBundle:Ad a
+        $em = $this->getEntityManager();
+
+        $dql= 'SELECT a FROM LSoftAdBundle:Ad a
                           JOIN LSoftAdBundle:AdsProvider ap WITH ap.ad = a
                           JOIN ap.domain d
-                          WHERE d.name = :domain  and ap.zone = :zone')
+                          WHERE d.name = :domain  and ap.zone = :zone';
+
+        $cacheDriver = $em->getConfiguration()->getResultCacheImpl();
+        $cacheId = (string)$kay;
+
+        if ($cacheDriver) {
+            if ($cacheDriver->contains($cacheId)) {
+                return $cacheDriver->fetch($cacheId);
+            }
+        }
+
+        $query = $em->createQuery($dql)
             ->setParameters(array('domain'=>$domain, 'zone'=>$zone))
-            ->setMaxResults(1)
-            ->getOneOrNullResult();
+            ->setMaxResults(1);
+        ;
+        $query->useResultCache(true, $livetime, $cacheId);
+        $visions = $query->getOneOrNullResult();
+        if ($cacheDriver) {
+            //
+            // Caching the hydrated result will save about 80% of loading time.
+            //
+            $cacheDriver->save($cacheId, $visions, $livetime);
+        }
+
+        $em->clear();
+        return $visions;
+
     }
 
     /**

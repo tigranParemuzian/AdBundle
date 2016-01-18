@@ -29,15 +29,6 @@
             <argument>NULL</argument>
         </service>
 
-        <!-- Ad analytics -->
-        <service id="lsoft.ad.admin.ads.analytics" class="LSoft\AdBundle\Admin\AdsAnalyticsAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="LSoft Ad" label="Ads Analytics"/>
-            <argument/>
-            <argument>LSoft\AdBundle\Entity\Ad</argument>
-            <argument>LSoftAdBundle:Admin/AdsAnalytics</argument>
-            <argument>NULL</argument>
-        </service>
-
         <service id="data_collector.ad_collector" class="LSoft\AdBundle\Controller\AdDataCollector">
             <tag name="data_collector" template="LSoftAdBundle:Collector:ad_collector.html.twig" id="ad_collector"  priority="300" />
         </service>
