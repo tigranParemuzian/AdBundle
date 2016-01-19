@@ -10,18 +10,17 @@ class AdRepository extends EntityRepository
      * This repository find ads by domain and zone
      *
      * @param $domain
-     * @param $zone
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findByAdsManager($domain, $zone, $kay = null, $livetime = null)
+    public function findByAdsManager($domain, $kay = null, $livetime = null)
     {
         $em = $this->getEntityManager();
 
-        $dql= 'SELECT a FROM LSoftAdBundle:Ad a
+        $dql= 'SELECT a as ad, ap.zone FROM LSoftAdBundle:Ad a
                           JOIN LSoftAdBundle:AdsProvider ap WITH ap.ad = a
                           JOIN ap.domain d
-                          WHERE d.name = :domain  and ap.zone = :zone';
+                          WHERE d.name = :domain';
 
         $cacheDriver = $em->getConfiguration()->getResultCacheImpl();
         $cacheId = (string)$kay;
@@ -33,11 +32,11 @@ class AdRepository extends EntityRepository
         }
 
         $query = $em->createQuery($dql)
-            ->setParameters(array('domain'=>$domain, 'zone'=>$zone))
-            ->setMaxResults(1);
+            ->setParameters(array('domain'=>$domain))
+        ;
         ;
         $query->useResultCache(true, $livetime, $cacheId);
-        $visions = $query->getOneOrNullResult();
+        $visions = $query->getResult();
         if ($cacheDriver) {
             //
             // Caching the hydrated result will save about 80% of loading time.
@@ -107,18 +106,9 @@ class AdRepository extends EntityRepository
         if($ads != null)
         {
             $query->andWhere('ad.id IN :ads_ids')
-            ->setParameter('ads_ids', $ads);
+                ->setParameter('ads_ids', $ads);
         }
         return $query->getQuery()->getResult();
-//        return $this->getEntityManager()
-//            ->createQuery('SELECT ad, adan  FROM LSoftAdBundle:Ad ad
-//                           LEFT JOIN ad.adAnalytics adan
-//                           WHERE ad.id IS NOT NULL
-//                           GROUP BY ad.id
-//                  ')
-//            ->getResult()
-//            ;
-
     }
 
 }

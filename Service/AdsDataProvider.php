@@ -18,7 +18,10 @@ use Symfony\Component\Validator\Constraints\DateTime;
  */
 class AdsDataProvider
 {
-    private $adsData;
+
+    private $adsData = array();
+
+    private $adSingle;
     /**
      * @var Container
      */
@@ -46,17 +49,42 @@ class AdsDataProvider
         // get entity manager
         $em = $this->container->get('doctrine')->getEntityManager();
         // get key
-        $key = $this->cretePattern($domain, $zone);
+        $key = $this->cretePattern($domain);
 
+        //get lifetime from caching
         $lifetime = $this->container->getParameter('l_soft_ad.lifetime');
 
+        $data = null;
 
-        $data = $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $zone, $key, $lifetime);
+        if(isset($this->adsData[$zone]))
+        {
+            $data = $this->adsData[$zone];
+        }
+        else
+        {
+            $ads = $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $key, $lifetime);
+
+            if(count($ads)>0)
+            {
+                foreach($ads as $ad)
+                {
+                    if($ad['zone'])
+                    {
+                        $this->adsData[$ad['zone']] = $ad['ad'];
+
+                        if($ad['zone'] == $zone)
+                        {
+                            $data = $this->adsData[$ad['zone']];
+                        }
+                    }
+                }
+            }
+        }
 
         if ($data != null) {
-            $this->adsData[] = array('ad_name' => $data->getName(), 'domain' => $domain, 'zone' => $zone);
+            $this->adSingle[] = array('ad_name' => $data->getName(), 'domain' => $domain, 'zone' => $zone);
             $session = $this->container->get('session');
-            $session->set('adData', $this->adsData);
+            $session->set('adData', $this->adSingle);
         }
 
         return $data;
@@ -72,11 +100,14 @@ class AdsDataProvider
         // get lifetime of apc caching from configs
         $lifetime = $this->container->getParameter('l_soft_ad.lifetime');
         // check object class
-        if ($object instanceof Ad) {   // get data by AD
+        if ($object instanceof Ad) {
+            // get data by AD
             $adsDates = $em->getRepository("LSoftAdBundle:Ad")->findParentById($object->getId());
-        } elseif ($object instanceof AdsProvider) {   // get data by AdsProvider
+        } elseif ($object instanceof AdsProvider) {
+            // get data by AdsProvider
             $adsDates[] = $object;
-        } elseif ($object instanceof Domain) {   // get data by Domain
+        } elseif ($object instanceof Domain) {
+            // get data by Domain
             $adsDates = $em->getRepository("LSoftAdBundle:Ad")->findParentByDomain($object->getId());
         }
 
@@ -95,7 +126,7 @@ class AdsDataProvider
                 $ad = $data->getAd();
 
                 if ($ad != null) {
-                    $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $ads[$data->getId()]['zone'], $kay, $lifetime);
+                    $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $kay, $lifetime);
                 }
             }
         }
@@ -105,15 +136,14 @@ class AdsDataProvider
      * This function generate kay for apc cache
      *
      * @param $domain
-     * @param $zone
      * @return string
      */
-    public function cretePattern($domain, $zone)
+    public function cretePattern($domain)
     {
         //get pattern from configs
         $pattern = $this->container->getParameter('l_soft_ad.pattern');
         // get kay for apc cache
-        $key = str_replace(' ', '_', $pattern) . '_' . str_replace(' ', '_', $domain) . '_' . str_replace(' ', '_', $zone);
+        $key = str_replace(' ', '_', $pattern) . '_' . str_replace(' ', '_', $domain);
 
         return $key;
     }

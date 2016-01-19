@@ -97,6 +97,12 @@ Config the bundle in the config.yml:
 
 ``` yml
 # app/config/config.yml
+doctrine:
+# ...
+     orm:
+     # ...
+        result_cache_driver: apc
+
 l_soft_ad:
 #   ...
     analytics: analytics calculate lifetime (seconds)
