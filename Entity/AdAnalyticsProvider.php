@@ -29,13 +29,6 @@ class AdAnalyticsProvider
     protected $id;
 
     /**
-     * @var
-     * @ORM\ManyToOne(targetEntity="LSoft\AdBundle\Entity\Ad", inversedBy="adAnalytics")
-     * @ORM\JoinColumn(fieldName="ad_id", referencedColumnName="id")
-     */
-    protected $ad;
-
-    /**
      * @ORM\Column(name="created", type="datetime", nullable=false)
      */
     protected $created;
@@ -75,7 +68,7 @@ class AdAnalyticsProvider
      */
     function __toString()
     {
-        return $this->ad ? $this->ad->getName() : '';
+        return $this->id ? (string)$this->id : '';
     }
 
     /**
@@ -158,29 +151,5 @@ class AdAnalyticsProvider
     public function getVisits()
     {
         return $this->visits;
-    }
-
-    /**
-     * Set ad
-     *
-     * @param \LSoft\AdBundle\Entity\Ad $ad
-     *
-     * @return AdAnalyticsProvider
-     */
-    public function setAd(\LSoft\AdBundle\Entity\Ad $ad = null)
-    {
-        $this->ad = $ad;
-
-        return $this;
-    }
-
-    /**
-     * Get ad
-     *
-     * @return \LSoft\AdBundle\Entity\Ad
-     */
-    public function getAd()
-    {
-        return $this->ad;
     }
 }

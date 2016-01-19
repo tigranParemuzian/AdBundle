@@ -14,9 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @package LSoft\AdBundle\Entity
  *
  * @ORM\Entity(repositoryClass="LSoft\AdBundle\Entity\Repository\AdRepository")
- * @ORM\Table(name="ad_ads", indexes={
- *           @ORM\Index(name="group_name", columns={"name"}),
- *     })
+ * @ORM\Table(name="ad_ads")
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("code", message="code.duplicate")
  */
@@ -43,12 +41,6 @@ class Ad
      *
      */
     protected $code;
-
-    /**
-     * @var
-     * @ORM\OneToMany(targetEntity="LSoft\AdBundle\Entity\AdAnalyticsProvider", mappedBy="ad")
-     */
-    protected $adAnalytics;
 
     /**
      * The __toString method allows a class to decide how it will react when it is converted to a string.
@@ -117,46 +109,5 @@ class Ad
     public function getCode()
     {
         return $this->code;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->adAnalytics = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add adAnalytic
-     *
-     * @param \LSoft\AdBundle\Entity\AdAnalyticsProvider $adAnalytic
-     *
-     * @return Ad
-     */
-    public function addAdAnalytic(\LSoft\AdBundle\Entity\AdAnalyticsProvider $adAnalytic)
-    {
-        $this->adAnalytics[] = $adAnalytic;
-
-        return $this;
-    }
-
-    /**
-     * Remove adAnalytic
-     *
-     * @param \LSoft\AdBundle\Entity\AdAnalyticsProvider $adAnalytic
-     */
-    public function removeAdAnalytic(\LSoft\AdBundle\Entity\AdAnalyticsProvider $adAnalytic)
-    {
-        $this->adAnalytics->removeElement($adAnalytic);
-    }
-
-    /**
-     * Get adAnalytics
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAdAnalytics()
-    {
-        return $this->adAnalytics;
     }
 }
