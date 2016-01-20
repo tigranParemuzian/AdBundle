@@ -26,7 +26,8 @@ class AdsProvider
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Ad", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Ad", inversedBy="adsProviders", cascade={"persist"})
+     * @ORM\JoinColumn(name="ad_id", referencedColumnName="id")
      */
     protected $ad;
 

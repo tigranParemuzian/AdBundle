@@ -101,34 +101,43 @@ class AdsDataProvider
         $lifetime = $this->container->getParameter('l_soft_ad.lifetime');
         // check object class
         if ($object instanceof Ad) {
-            // get data by AD
-            $adsDates = $em->getRepository("LSoftAdBundle:Ad")->findParentById($object->getId());
-        } elseif ($object instanceof AdsProvider) {
-            // get data by AdsProvider
-            $adsDates[] = $object;
-        } elseif ($object instanceof Domain) {
-            // get data by Domain
-            $adsDates = $em->getRepository("LSoftAdBundle:Ad")->findParentByDomain($object->getId());
-        }
+            // get domains by ad id
+            $adsDomains = $em->getRepository("LSoftAdBundle:Ad")->findParentById($object->getId());
 
-        $ads = array();
-
-        foreach ($adsDates as $data) {
-            $ads[$data->getId()]['ad'] = $data->getAd();
-            $ads[$data->getId()]['zone'] = $data->getZone();
-
-            foreach ($data->getDomain() as $domain) {
-                $domainName = $domain->getName();
-                if (isset($domainName) && $domainName != null) ;
-
-                $kay = $this->cretePattern($domainName, $data->getZone());
-
-                $ad = $data->getAd();
-
-                if ($ad != null) {
-                    $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $kay, $lifetime);
+            if(count($adsDomains) != null)
+            {
+                // update doctrine cache by domains
+                foreach($adsDomains as $adsDomain)
+                {
+                    $domain = $adsDomain['name'];
+                    $key = $this->cretePattern($domain);
+                    $update = true;
+                    $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $key, $lifetime, $update);
                 }
             }
+
+        } elseif ($object instanceof AdsProvider) {
+            // get domains by Ads Provider id
+            $adsDomains = $em->getRepository("LSoftAdBundle:Ad")->findDomainsByProvider($object->getId());
+
+            if(count($adsDomains) != null)
+            {
+                foreach($adsDomains as $adsDomain)
+                {
+                    // update doctrine cache by domains
+                    $domain = $adsDomain['name'];
+                    $key = $this->cretePattern($domain);
+                    $update = true;
+                    $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $key, $lifetime, $update);
+                }
+            }
+
+        } elseif ($object instanceof Domain) {
+            // get domain name for update cache
+            $domain = $object->getName();
+            $key = $this->cretePattern($domain);
+            $update = true;
+            $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $key, $lifetime, $update);
         }
     }
 

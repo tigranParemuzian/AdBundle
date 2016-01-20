@@ -44,10 +44,9 @@ class Ad
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="LSoft\AdBundle\Entity\AdAnalyticsProvider", mappedBy="ad")
+     * @ORM\OneToMany(targetEntity="LSoft\AdBundle\Entity\AdsProvider", mappedBy="ad")
      */
-    protected $adAnalytics;
-
+    protected $adsProvider;
     /**
      * The __toString method allows a class to decide how it will react when it is converted to a string.
      *

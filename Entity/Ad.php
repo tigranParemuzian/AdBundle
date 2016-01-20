@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="LSoft\AdBundle\Entity\Repository\AdRepository")
  * @ORM\Table(name="ad_ads")
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity("code", message="code.duplicate")
+ * @UniqueEntity("name", message="name.duplicate")
  */
 class Ad
 {
@@ -42,6 +42,11 @@ class Ad
      */
     protected $code;
 
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="LSoft\AdBundle\Entity\AdsProvider", mappedBy="ad")
+     */
+    protected $adsProviders;
     /**
      * The __toString method allows a class to decide how it will react when it is converted to a string.
      *
@@ -109,5 +114,46 @@ class Ad
     public function getCode()
     {
         return $this->code;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->adsProviders = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add adsProviders
+     *
+     * @param \LSoft\AdBundle\Entity\AdsProvider $adsProviders
+     *
+     * @return Ad
+     */
+    public function addAdsProviders(\LSoft\AdBundle\Entity\AdsProvider $adsProviders)
+    {
+        $this->adsProviders[] = $adsProviders;
+
+        return $this;
+    }
+
+    /**
+     * Remove adsProviders
+     *
+     * @param \LSoft\AdBundle\Entity\AdsProvider $adsProviders
+     */
+    public function removeAdsProviders(\LSoft\AdBundle\Entity\AdsProvider $adsProviders)
+    {
+        $this->adsProviders->removeElement($adsProviders);
+    }
+
+    /**
+     * Get adsProviders
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdsProviders()
+    {
+        return $this->adsProviders;
     }
 }
