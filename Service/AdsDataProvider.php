@@ -64,11 +64,11 @@ class AdsDataProvider
         {
             $ads = $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $key, $lifetime);
 
-            if(count($ads)>0)
+            if(is_array($ads) && count($ads)>0)
             {
                 foreach($ads as $ad)
                 {
-                    if($ad['zone'])
+                    if(isset($ad['zone']) && $ad['zone'] != null)
                     {
                         $this->adsData[$ad['zone']] = $ad['ad'];
 
