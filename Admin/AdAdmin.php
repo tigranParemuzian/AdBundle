@@ -16,6 +16,26 @@ use Sonata\AdminBundle\Show\ShowMapper;
 class AdAdmin extends Admin
 {
     /**
+     * @var bool
+     */
+    public $supportsPreviewMode = true;
+    /**
+     * @param string $name
+     * @return null|string
+     */
+    public function getTemplate($name)
+    {
+        switch ($name) {
+            case 'preview':
+                return 'LSoftAdBundle:Admin:preview_ad.html.twig';
+                break;
+            default:
+                return parent::getTemplate($name);
+                break;
+        }
+    }
+
+    /**
      * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
