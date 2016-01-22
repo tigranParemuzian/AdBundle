@@ -149,4 +149,20 @@ class AdRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
+    /**
+     * This repository find all ads order by dimensionIndex
+     *
+     * @return array
+     */
+    public function findAllForAnalytics()
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT ad.id, ad.name, ad.dimensionIndex
+                            FROM LSoftAdBundle:Ad ad
+                            WHERE ad.id IS NOT NULL
+                            ORDER BY ad.dimensionIndex ASC ')
+            ->getArrayResult()
+            ;
+    }
+
 }
