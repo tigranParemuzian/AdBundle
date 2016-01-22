@@ -1,9 +1,9 @@
 {% extends base_template %}
 
   {% block stylesheets %}
+    {{ parent() }}
 
-      {{ parent() }}
-          <link rel="stylesheet" href="{{ asset('bundles/lsoftad/css/analytics.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/lsoftad/css/analytics.css') }}">
 
   {% endblock %}
 
@@ -16,15 +16,15 @@
     <div id="auth-button"></div>
     <div id="active-users-container"></div>
 
-    {# TODO: {{ dump(ads) }}#}
     <div class="analytics-container row">
         <div class="col-sm-7">
             <section id="date-range-sessions" class="cleafix"></section>
         </div>
         <div class="col-sm-3">
             <select id="ads" class="form-control cleafix">
-                <option value="2">Toyota</option>
-                <option value="1">Cola</option>
+                {% for ad in ads %}
+                    <option value="{{ ad.dimensionIndex }}">{{ ad.name }}</option>
+                {% endfor %}
             </select>
         </div>
 
@@ -35,6 +35,7 @@
 
 {% endblock %}
 {% block javascripts %}
+    {{ parent() }}
 
     <script>
         (function(w,d,s,g,js,fjs){
@@ -51,9 +52,14 @@
 
         gapi.analytics.ready(function() {
 
+            var ads = $("#ads");
+
             // Authorize the user.
             var CLIENT_ID = '{{ googleAccount }}';
             var VIEW_ID = 'ga:{{ googleView }}';
+
+            // Init Dimension
+            var DIMENSION_INDEX = ads.val();
 
             gapi.analytics.auth.authorize({
                 container: 'auth-button',
@@ -77,16 +83,16 @@
             var timeline_sessions = new gapi.analytics.googleCharts.DataChart({
                 reportType: 'ga',
                 query: {
-                        "start-date": "30daysAgo",
-                        "end-date": "today",
-                        'ids': VIEW_ID,
-                        "dimensions": "ga:dimension1",
-                        "metrics": [
-                            "ga:pageViews"
-                        ],
-                        'sort': '-ga:pageViews',
-                        "start-index": 1,
-                        "max-results": 1000
+                    "start-date": "30daysAgo",
+                    "end-date": "today",
+                    'ids': VIEW_ID,
+                    "dimensions": "ga:date",
+                    "metrics": [
+                        "ga:pageViews"
+                    ],
+                    "filters": "ga:dimension"+DIMENSION_INDEX+"=~.*",
+                    "start-index": 1,
+                    "max-results": 1000
                 },
                 "itemsPerPage": 1000,
                 "totalResults": 8,
@@ -107,7 +113,9 @@
             gapi.analytics.auth.on('success', function() {
 
                 // execute charts
-                timeline_sessions.execute();
+                if(DIMENSION_INDEX){
+                    timeline_sessions.execute();
+                }
 
                 // execute date-range-pickers
                 dateRange_sessions.execute();
@@ -132,6 +140,17 @@
             });
 
             // end date-range-pickers
+
+            ads.bind('change', function(){
+                DIMENSION_INDEX = ads.val();
+
+                if(DIMENSION_INDEX){
+                    timeline_sessions.set({query: {
+                        "filters": "ga:dimension"+DIMENSION_INDEX+"=~.*"
+                    }}).execute();
+                }
+
+            })
 
         });
     </script>
