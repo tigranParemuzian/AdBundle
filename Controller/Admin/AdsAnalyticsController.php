@@ -33,10 +33,15 @@ class AdsAnalyticsController extends Controller
             throw new AccessDeniedException();
         }
 
+        // get entity manager
+        $em = $this->getDoctrine()->getManager();
+        // get all ads for analytics
+        $ads = $em->getRepository('LSoftAdBundle:Ad')->findAllForAnalytics();
+        // get parameters from parameters.yml for login
         $googleAccount = $this->container->getParameter('google_analytics_account_id');
         $googleView = $this->container->getParameter('google_analytics_view_id');
 
         return $this->render('LSoftAdBundle:Admin:analytics.html.twig',
-            array( 'googleAccount' => $googleAccount, 'googleView'=>$googleView));
+            array( 'googleAccount' => $googleAccount, 'googleView'=>$googleView, 'ads'=>$ads));
     }
 }

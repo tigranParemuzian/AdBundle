@@ -16,6 +16,7 @@
     <div id="auth-button"></div>
     <div id="active-users-container"></div>
 
+    {# TODO: {{ dump(ads) }}#}
     <div class="analytics-container row">
         <div class="col-sm-12">
             <section id="date-range-sessions" class="cleafix"></section>
@@ -74,7 +75,7 @@
                         "start-date": "30daysAgo",
                         "end-date": "today",
                         'ids': VIEW_ID,
-                        "dimensions": "ga:dimension2",
+                        "dimensions": "ga:dimension1",
                         "metrics": [
                             "ga:pageViews"
                         ],

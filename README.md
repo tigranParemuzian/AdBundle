@@ -51,7 +51,7 @@ doctrine:
 l_soft_ad:
     pattern: pattern of apc cache (string)
     lifetime: apc cache lifetime (seconds)
-    
+
 ```
 
 ### Step 4: Update database
