@@ -17,18 +17,23 @@
     <div id="active-users-container"></div>
 
     <div class="analytics-container row">
-        <div class="col-sm-12">
+        <div class="col-sm-7">
             <section id="date-range-sessions" class="cleafix"></section>
         </div>
+        <div class="col-sm-3">
+            <select id="ads" class="form-control cleafix">
+                <option value="2">Toyota</option>
+                <option value="1">Cola</option>
+            </select>
+        </div>
+
         <div class="col-sm-12">
             <section id="timeline-sessions"></section>
         </div>
-
     </div>
 
 {% endblock %}
 {% block javascripts %}
-    {{ parent() }}
 
     <script>
         (function(w,d,s,g,js,fjs){
