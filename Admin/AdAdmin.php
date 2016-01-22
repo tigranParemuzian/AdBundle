@@ -42,7 +42,7 @@ class AdAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
-            ->add('code')
+            ->add('dimensionIndex')
         ;
     }
 
@@ -54,6 +54,7 @@ class AdAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->addIdentifier('code')
+            ->addIdentifier('dimensionIndex')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
@@ -72,6 +73,11 @@ class AdAdmin extends Admin
         $formMapper
             ->add('name')
             ->add('code', 'textarea', array('required' => false))
+            ->add('dimensionIndex', 'number', array('required' => false))
+            ->setHelps(array(
+                'dimensionIndex' => 'Set the google <a href="https://support.google.com/analytics/answer/6164990?hl=en" target="_blank"> Analytics dimension </a>index of a ad page',
+            ))
+
         ;
     }
 
@@ -83,6 +89,7 @@ class AdAdmin extends Admin
         $showMapper
             ->add('name')
             ->add('codes')
+            ->add('dimensionIndex')
         ;
     }
 

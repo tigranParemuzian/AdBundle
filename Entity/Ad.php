@@ -17,6 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="ad_ads")
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("name", message="name.duplicate")
+ * @UniqueEntity("dimensionIndex", message="dimensionIndex.duplicate")
  */
 class Ad
 {
@@ -41,6 +42,12 @@ class Ad
      *
      */
     protected $code;
+
+    /**
+     * @var
+     * @ORM\Column(name="dimension_index", type="integer", nullable=true, unique=true)
+     */
+    protected $dimensionIndex;
 
     /**
      * @var
@@ -156,4 +163,21 @@ class Ad
     {
         return $this->adsProviders;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDimensionIndex()
+    {
+        return $this->dimensionIndex;
+    }
+
+    /**
+     * @param mixed $dimensionIndex
+     */
+    public function setDimensionIndex($dimensionIndex)
+    {
+        $this->dimensionIndex = $dimensionIndex;
+    }
+
 }

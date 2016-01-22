@@ -71,18 +71,17 @@
             var timeline_sessions = new gapi.analytics.googleCharts.DataChart({
                 reportType: 'ga',
                 query: {
-//
-//            {
-                "start-date": "30daysAgo",
-                    "end-date": "today",
-                    'ids': VIEW_ID,
-                    "dimensions": "ga:pageTitle",
-                    "metrics": [
-                "ga:pageviews, ga:uniquePageviews, ga:timeOnPage"
-            ],
-                    "start-index": 1,
-                    "max-results": 1000
-            },
+                        "start-date": "30daysAgo",
+                        "end-date": "today",
+                        'ids': VIEW_ID,
+                        "dimensions": "ga:dimension2",
+                        "metrics": [
+                            "ga:pageViews"
+                        ],
+                        'sort': '-ga:pageViews',
+                        "start-index": 1,
+                        "max-results": 1000
+                },
                 "itemsPerPage": 1000,
                 "totalResults": 8,
                 "containsSampledData": true,

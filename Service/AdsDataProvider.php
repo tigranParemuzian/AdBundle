@@ -82,7 +82,7 @@ class AdsDataProvider
         }
 
         if ($data != null) {
-            $this->adSingle[] = array('ad_name' => $data->getName(), 'domain' => $domain, 'zone' => $zone);
+            $this->adSingle[] = array('ad_name' => $data->getName(), 'index'=>$data->getDimensionIndex(), 'domain' => $domain, 'zone' => $zone);
             $session = $this->container->get('session');
             $session->set('adData', $this->adSingle);
         }
