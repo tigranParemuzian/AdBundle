@@ -42,10 +42,16 @@ Config the bundle in the config.yml:
 
 ``` yml
 # app/config/config.yml
+doctrine:
+# ...
+     orm:
+     # ...
+        result_cache_driver: apc
+# ...
 l_soft_ad:
     pattern: pattern of apc cache (string)
     lifetime: apc cache lifetime (seconds)
-    analytics: analytics calculate lifetime (seconds)
+    
 ```
 
 ### Step 4: Update database
@@ -97,11 +103,6 @@ Config the bundle in the config.yml:
 
 ``` yml
 # app/config/config.yml
-doctrine:
-# ...
-     orm:
-     # ...
-        result_cache_driver: apc
 
 l_soft_ad:
 #   ...
