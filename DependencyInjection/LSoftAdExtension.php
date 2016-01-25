@@ -32,7 +32,7 @@ class LSoftAdExtension extends Extension
 
 
             // analytics part
-            if (isset($config) && isset($config['analytics']) && is_numeric($config['analytics'])) {
+            if (isset($config) && isset($config['analytics']) && $config['analytics'] == true) {
                 if($googleAccount != null &&  $googleView != null)
                 {
                     $container->setParameter($this->getAlias() . '.analytics', $config['analytics']);
