@@ -93,8 +93,9 @@ http://www.google.com/analytics
 # app/config/parameters.yml
 parameters:
 # ....
-    google_analytics_account_id: (string)
-    google_analytics_view_id: (number)
+    google_analytics_account_id: UA-XXXXXXXX-X # [a link](https://support.google.com/analytics/answer/1032385?hl=en)
+    google_analytics_web_client_id: (google analytics web client id token) # [a link](https://console.developers.google.com/apis/credentials)
+    google_analytics_view_id: xxxxxxxxx
 ```
 
 ### Step 3: Enable the admin service
@@ -103,6 +104,13 @@ Config the bundle in the config.yml:
 
 ``` yml
 # app/config/config.yml
+
+# Twig Configuration
+twig:
+   # ...
+    globals:
+            google_analytics_account_id: %google_analytics_account_id%
+
 
 l_soft_ad:
 #   ...

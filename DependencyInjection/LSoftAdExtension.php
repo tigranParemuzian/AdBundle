@@ -28,12 +28,14 @@ class LSoftAdExtension extends Extension
         $loader->load('services.xml');
 
         $googleAccount = $container->getParameter('google_analytics_account_id');
+        $googleAccountWebClientId = $container->getParameter('google_analytics_web_client_id');
         $googleView = $container->getParameter('google_analytics_view_id');
 
 
             // analytics part
             if (isset($config) && isset($config['analytics']) && $config['analytics'] == true) {
-                if($googleAccount != null &&  $googleView != null)
+                //check parameters
+                if($googleAccount != null &&  $googleView != null && $googleAccountWebClientId!= null)
                 {
                     $container->setParameter($this->getAlias() . '.analytics', $config['analytics']);
 

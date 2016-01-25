@@ -38,7 +38,7 @@ class AdsAnalyticsController extends Controller
         // get all ads for analytics
         $ads = $em->getRepository('LSoftAdBundle:Ad')->findAllForAnalytics();
         // get parameters from parameters.yml for login
-        $googleAccount = $this->container->getParameter('google_analytics_account_id');
+        $googleAccount = $this->container->getParameter('google_analytics_web_client_id');
         $googleView = $this->container->getParameter('google_analytics_view_id');
 
         return $this->render('LSoftAdBundle:Admin:analytics.html.twig',
