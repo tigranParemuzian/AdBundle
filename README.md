@@ -95,7 +95,7 @@ parameters:
 # ....
     google_analytics_account_id: UA-XXXXXXXX-X # [a link](https://support.google.com/analytics/answer/1032385?hl=en)
     google_analytics_web_client_id: (google analytics web client id token) # [a link](https://console.developers.google.com/apis/credentials)
-    google_analytics_view_id: xxxxxxxxx
+    google_analytics_view_id: xxxxxxxxx,
 ```
 
 ### Step 3: Enable the admin service
@@ -121,28 +121,24 @@ l_soft_ad:
 
 ``` twig
 
- <script>
-     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-XXXXXXXX-X', 'auto');
-    ga('require', 'displayfeatures');
-
-    {% if app.session.get('adData') %}
-        {% set analytics = app.session.get('adData') %}
-        {% for analytic in analytics %}
-            {% if analytic.index %}
-                ga('set', 'dimension{{ analytic.index }}','{{ analytic.ad_name }}');
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-
-    {{ app.session.set('adData', null) }}
-
-    ga('send', 'pageview');
-
-</script>
+                ga('create', '{{ google_analytics_account_id }}', 'auto');
+                ga('require', 'displayfeatures');
+                {% if app.session.get('adData') %}
+                    {% set analytics = app.session.get('adData') %}
+                    {% for analytic in analytics %}
+                        {% if analytic.index %}
+                            ga('set', 'dimension{{ analytic.index }}', '{{ analytic.domain }}');
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                ga('send', 'pageview');
+        {{ app.session.set('adData', null) }}
+    </script>
 
 ```
