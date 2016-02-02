@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class AdsProvider
  *
  * @ORM\Entity()
- * @ORM\Table(name="lsoft_ads_provider", uniqueConstraints={@ORM\UniqueConstraint(name="ads_unique_idx", columns={"ad_id", "zone"})})
+ * @ORM\Table(name="ad_ads_provider", uniqueConstraints={@ORM\UniqueConstraint(name="ads_unique_idx", columns={"ad_id", "zone"})})
  *
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(fields={"ad", "zone"}, message="entity.duplicate")
@@ -109,29 +109,5 @@ class AdsProvider
     public function getZone()
     {
         return $this->zone;
-    }
-
-    /**
-     * Set domain
-     *
-     * @param \LSoft\AdBundle\Entity\Domain $domain
-     *
-     * @return AdsProvider
-     */
-    public function setDomain(\LSoft\AdBundle\Entity\Domain $domain = null)
-    {
-        $this->domain = $domain;
-
-        return $this;
-    }
-
-    /**
-     * Get domain
-     *
-     * @return \LSoft\AdBundle\Entity\Domain
-     */
-    public function getDomain()
-    {
-        return $this->domain;
     }
 }

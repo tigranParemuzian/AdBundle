@@ -96,6 +96,41 @@ class AdAdmin extends Admin
     /**
      * {@inheritdoc}
      */
+    public function preUpdate($object)
+    {
+        $container = $this->getConfigurationPool()->getContainer();
+        $analytics = $container->getParameter('l_soft_ad.analytics');
+
+        if($analytics == true)
+        {
+            if(!$object->getDimensionIndex())
+            {
+                return;
+            }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prePersist($object)
+    {
+        $container = $this->getConfigurationPool()->getContainer();
+        $analytics = $container->getParameter('l_soft_ad.analytics');
+
+        if($analytics == true)
+        {
+            if(!$object->getDimensionIndex())
+            {
+                return;
+            }
+        }
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function postPersist($object)
     {
         $container = $this->getConfigurationPool()->getContainer();

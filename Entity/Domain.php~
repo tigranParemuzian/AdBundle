@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Domain
  *
  * @ORM\Entity()
- * @ORM\Table(name="lsoft_ad_domain")
+ * @ORM\Table(name="ad_domain")
  *
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("name", message="name.duplicate")
@@ -33,7 +33,7 @@ class Domain
     protected $adsProvider;
 
     /**
-     * @ORM\Column(name="name", type="string", unique=true)
+     * @ORM\Column(name="name", type="string", name="true")
      */
     protected $name;
 
@@ -80,46 +80,5 @@ class Domain
     public function getName()
     {
         return $this->name;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->adsProvider = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add adsProvider
-     *
-     * @param \LSoft\AdBundle\Entity\AdsProvider $adsProvider
-     *
-     * @return Domain
-     */
-    public function addAdsProvider(\LSoft\AdBundle\Entity\AdsProvider $adsProvider)
-    {
-        $this->adsProvider[] = $adsProvider;
-
-        return $this;
-    }
-
-    /**
-     * Remove adsProvider
-     *
-     * @param \LSoft\AdBundle\Entity\AdsProvider $adsProvider
-     */
-    public function removeAdsProvider(\LSoft\AdBundle\Entity\AdsProvider $adsProvider)
-    {
-        $this->adsProvider->removeElement($adsProvider);
-    }
-
-    /**
-     * Get adsProvider
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAdsProvider()
-    {
-        return $this->adsProvider;
     }
 }

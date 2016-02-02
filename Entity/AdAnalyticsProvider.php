@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @package LSoft\AdBundle\Entity
  *
  * @ORM\Entity(repositoryClass="LSoft\AdBundle\Entity\Repository\AdAnalyticsProviderRepository")
- * @ORM\Table(name="ad_analytics_provider")
+ * @ORM\Table(name="lsoft_ad_analytics_provider")
  * @ORM\HasLifecycleCallbacks()
  */
 class AdAnalyticsProvider

@@ -17,6 +17,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request, $domain, $zone)
     {
+        $zone = str_replace(' ', '_', strtolower($zone));
         // get data
         $data = $this->container->get('lsoft.ads.check_data')->checkData($domain, $zone);
 

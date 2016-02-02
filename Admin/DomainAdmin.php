@@ -61,6 +61,14 @@ class DomainAdmin extends Admin
         ;
     }
 
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function prePersist($object)
+//    {
+//dump($object); exit;
+//    }
+
     /**
      * {@inheritdoc}
      */

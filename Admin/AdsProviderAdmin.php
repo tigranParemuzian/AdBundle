@@ -74,7 +74,13 @@ class AdsProviderAdmin extends Admin
      */
     public function preUpdate($object)
     {
-        $this->addAndRemoveDomain($object);
+        $zone = $object->getZone();
+        if($zone)
+        {
+            $zone = str_replace(' ', '_', strtolower($zone));
+
+            $object->setZone($zone);
+        }
     }
 
     /**
@@ -82,32 +88,13 @@ class AdsProviderAdmin extends Admin
      */
     public function prePersist($object)
     {
-        $this->addAndRemoveDomain($object);
-    }
+        $zone = $object->getZone();
+        if($zone)
+        {
+            $zone = str_replace(' ', '_', strtolower($zone));
 
-
-    /**
-     * @param $object
-     */
-    private function addAndRemoveDomain(&$object)
-    {
-        // get domains
-        $domains = $object->getDomain();
-        foreach($domains as $domain) {
-
-            if (!$domain->getAdsProvider()->contains($object)) {
-                $domain->addAdsProvider($object);
-            }
+            $object->setZone($zone);
         }
-
-        if(method_exists($domains, 'getDeleteDiff')){
-            $deleted = $domains->getDeleteDiff();
-            foreach($deleted as $delete) {
-                $object->removeDomain($delete);
-                $delete->removeAdsProvider($object);
-            }
-        }
-
     }
 
     /**
