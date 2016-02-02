@@ -12,10 +12,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class AdsProvider
  *
  * @ORM\Entity()
- * @ORM\Table(name="lsoft_ads_provider", uniqueConstraints={@ORM\UniqueConstraint(name="ads_unique_idx", columns={"ad_id", "zone"})})
+ * @ORM\Table(name="lsoft_ads_provider", uniqueConstraints={@ORM\UniqueConstraint(name="ads_unique_idx", columns={"ad_id", "domain", "zone"})})
  *
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(fields={"ad", "zone"}, message="entity.duplicate")
+ * @UniqueEntity(fields={"ad", "domain", "zone"}, message="entity.duplicate")
  * @package LSoft\AdBundle\Entity
  */
 class AdsProvider
