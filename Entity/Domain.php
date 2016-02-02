@@ -3,15 +3,18 @@
 namespace LSoft\AdBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity()
- * @ORM\Table(name="ad_domain")
  * Class Domain
  *
+ * @ORM\Entity()
+ * @ORM\Table(name="ad_domain")
  *
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity("name", message="name.duplicate")
  * @package LSoftAdBundle\Entity
  */
 class Domain
@@ -31,7 +34,7 @@ class Domain
     protected $adsProvider;
 
     /**
-     * @ORM\Column(name="name", type="string")
+     * @ORM\Column(name="name", type="string", name="true")
      */
     protected $name;
 
