@@ -63,7 +63,6 @@ class AdRepository extends EntityRepository
             $cacheDriver->save($cacheId, $visions, $livetime);
         }
 
-        $em->clear();
         return $visions;
 
     }
