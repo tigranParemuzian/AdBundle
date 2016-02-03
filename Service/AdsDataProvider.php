@@ -56,25 +56,29 @@ class AdsDataProvider
 
         $data = null;
 
+        $ads = $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $key, $lifetime);
+
         if(isset($this->adsData[$zone]))
         {
             $data = $this->adsData[$zone];
         }
         else
         {
+            // get data bu domain
             $ads = $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $key, $lifetime);
 
-            if(is_array($ads) && count($ads)>0)
+            if($ads && count($ads)>0)
             {
+                // set data in array by zone and domain
                 foreach($ads as $ad)
                 {
-                    if(isset($ad['zone']) && $ad['zone'] != null)
+                    if($ad->getZone() != null)
                     {
-                        $this->adsData[$ad['zone']] = $ad['ad'];
+                        $this->adsData[$ad->getZone()] = $ad->getAd();
 
-                        if($ad['zone'] == $zone)
+                        if($ad->getZone() == $zone)
                         {
-                            $data = $this->adsData[$ad['zone']];
+                            $data = $this->adsData[$ad->getZone()];
                         }
                     }
                 }
@@ -82,7 +86,8 @@ class AdsDataProvider
         }
 
         if ($data != null) {
-            $this->adSingle[] = array('ad_name' => $data->getName(), 'index'=>$data->getDimensionIndex(), 'domain' => $domain, 'zone' => $zone);
+            //
+            $this->adSingle[] = array('ad_name' => $data->getName(), 'index'=>(int)$data->getDimensionIndex(), 'domain' => $domain, 'zone' => $zone);
             $session = $this->container->get('session');
             $session->set('adData', $this->adSingle);
         }

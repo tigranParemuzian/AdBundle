@@ -17,10 +17,10 @@ class AdRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
 
-        $dql= 'SELECT a as ad, ap.zone FROM LSoftAdBundle:Ad a
-                          JOIN LSoftAdBundle:AdsProvider ap WITH ap.ad = a
-                          JOIN ap.domain d
-                          WHERE d.name = :domain';
+        $dql= 'SELECT ap, a FROM LSoftAdBundle:AdsProvider ap
+              LEFT JOIN ap.ad a
+              LEFT JOIN ap.domain d
+              WHERE d.name = :domain AND a.id IS NOT NULL ';
         // get doctrine cache
         $cacheDriver = $em->getConfiguration()->getResultCacheImpl();
         // create kay for cache id
@@ -51,7 +51,7 @@ class AdRepository extends EntityRepository
 
        // create query by dql
         $query = $em->createQuery($dql)
-            ->setParameters(array('domain'=>$domain)) ;
+            ->setParameter('domain',$domain) ;
         // enable result cache
         $query->useResultCache(true, $livetime, $cacheId);
         // get result
