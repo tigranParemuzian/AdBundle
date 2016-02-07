@@ -56,8 +56,6 @@ class AdsDataProvider
 
         $data = null;
 
-        $ads = $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $key, $lifetime);
-
         if(isset($this->adsData[$zone]))
         {
             $data = $this->adsData[$zone];
