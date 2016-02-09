@@ -56,7 +56,8 @@ class AdRepository extends EntityRepository
         $query->useResultCache(true, $livetime, $cacheId);
         // get result
         $visions = $query->getResult();
-        if ($cacheDriver && $visions != null) {
+        
+        if ($cacheDriver && $visions !== null) {
             //
             // Caching the hydrated result will save about 80% of loading time.
             //

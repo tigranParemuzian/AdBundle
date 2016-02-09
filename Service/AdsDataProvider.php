@@ -65,7 +65,7 @@ class AdsDataProvider
             // get data bu domain
             $ads = $em->getRepository("LSoftAdBundle:Ad")->findByAdsManager($domain, $key, $lifetime);
 
-            if($ads && count($ads)>0)
+            if($ads != null && count($ads)>0)
             {
                 // set data in array by zone and domain
                 foreach($ads as $ad)

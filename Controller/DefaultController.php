@@ -15,7 +15,7 @@ class DefaultController extends Controller
     /**
      * @Template()
      */
-    public function indexAction(Request $request, $domain, $zone)
+    public function indexAction($domain, $zone)
     {
         $zone = str_replace(' ', '_', strtolower($zone));
         // get data
