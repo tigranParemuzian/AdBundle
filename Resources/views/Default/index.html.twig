@@ -6,7 +6,7 @@
         {% if ads.code %}
         {{ ads.code|raw }}
         {% else %}
-            <a href="{{ ads.url }}">
+            <a href="{{ ads.url }}" target="_blank">
                 <img class="lsoft-ad-image" src="{{ ads.getDownloadLink }}" width="100%" height="100%">
             </a>
         {% endif %}

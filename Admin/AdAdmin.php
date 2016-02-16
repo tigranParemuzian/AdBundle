@@ -91,9 +91,9 @@ class AdAdmin extends Admin
             ->end()
                 ->setHelps(array(
                     'dimensionIndex' => 'Set the google <a href="https://support.google.com/analytics/answer/6164990?hl=en" target="_blank"> Analytics dimension </a>index of a ad page',
-                    'url' => 'This field url of custom ad',
-                    'file' => 'This field image of custom ad',
-                    'code' => 'This field code of Ad ',
+                    'url' => 'This is URL field of custom ad',
+                    'file' => 'This is image field of custom ad',
+                    'code' => 'This field is Google Adsense code of Ad ',
                 ))
 
         ;
