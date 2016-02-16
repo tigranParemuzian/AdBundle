@@ -6,5 +6,8 @@
         {{ ads.code|raw }}
     {% elseif ads == false and is_granted('ROLE_SUPER_ADMIN', app.user) %}
         <p>Ad by {{ zone }} not found </p>
+        {% if ads.getDownloadLink %}
+            <img class="lsoft-ad-image" src="{{ ads.getDownloadLink }}" width="100%" height="100%">
+        {% endif %}
     {% endif %}
 {% endblock %}

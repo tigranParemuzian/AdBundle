@@ -1,0 +1,13 @@
+{% block ad_file_type_widget %}
+
+    {% set object = form.parent.vars.value %}
+
+    {% set filename = object.filename %}
+    {% if filename %}
+        <img  height="50" src="{{ object.downloadLink }}">
+        <a href="{{ path('l_soft_remove_image_ad', {'filename' : filename, 'object' : object.className  }) }}"><span class="glyphicon glyphicon-remove"></span></a>
+    {% else %}
+        {{ form_widget(form) }}
+    {% endif %}
+
+{% endblock ad_file_type_widget %}

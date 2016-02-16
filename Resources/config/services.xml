@@ -38,6 +38,11 @@
             <argument type="service" id="service_container"/>
         </service>
 
+        <!-- Ad file form type include -->
+        <service id="lsoft.ad.form.type.file" class="LSoft\AdBundle\Form\IconType">
+            <tag name="form.type" alias="ad_file_type"  />
+        </service>
+
     </services>
 
 </container>

@@ -142,3 +142,39 @@ l_soft_ad:
     </script>
 
 ```
+
+## Enable File in admin dashboard
+-----------------------
+
+### Step 1: Create google analytics account
+
+Create web/uploads/l_soft_ad_images directory
+
+### Step 2: Enable form twig widget
+
+``` yml
+# app/config/config.yml
+
+twig:
+    # ....
+    form:
+        resources: ['LSoftAdBundle:Form:ad_file.html.twig']
+    # ....
+
+```
+
+### Step 3: Enable the bundle routing
+
+Config the bundle in the routing.yml:
+
+``` yml
+# app/config/routing.yml
+
+# ...
+lsoft_ads:
+    resource: "@LSoftAdBundle/Controller/"
+    type:     annotation
+    prefix:   /
+# ...
+
+```

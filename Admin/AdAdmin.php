@@ -74,6 +74,7 @@ class AdAdmin extends Admin
             ->add('name')
             ->add('code', 'textarea', array('required' => false))
             ->add('dimensionIndex', 'number', array('required' => false))
+            ->add('file', 'ad_file_type', array('required' => false))
             ->setHelps(array(
                 'dimensionIndex' => 'Set the google <a href="https://support.google.com/analytics/answer/6164990?hl=en" target="_blank"> Analytics dimension </a>index of a ad page',
             ))
