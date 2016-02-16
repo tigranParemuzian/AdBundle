@@ -3,9 +3,12 @@
 
 {% block content %}
     {% if ads != false %}
+        {% if ads.code %}
         {{ ads.code|raw }}
-        {% if ads.getDownloadLink %}
-            <img class="lsoft-ad-image" src="{{ ads.getDownloadLink }}" width="100%" height="100%">
+        {% else %}
+            <a href="{{ ads.url }}">
+                <img class="lsoft-ad-image" src="{{ ads.getDownloadLink }}" width="100%" height="100%">
+            </a>
         {% endif %}
     {% elseif ads == false and is_granted('ROLE_SUPER_ADMIN', app.user) %}
         <p>Ad by {{ zone }} not found </p>

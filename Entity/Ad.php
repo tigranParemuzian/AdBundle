@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Class Ad
@@ -19,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("name", message="name.duplicate")
  * @UniqueEntity("dimensionIndex", message="dimensionIndex.duplicate")
+ * @Assert\Callback(methods={"checkDataProvider"})
  */
 class Ad
 {
@@ -181,8 +183,6 @@ class Ad
         $this->dimensionIndex = $dimensionIndex;
     }
 
-
-
     /**
      * @Assert\Image()
      */
@@ -197,6 +197,12 @@ class Ad
      * @ORM\Column(name="file_name", type="string", length=255, nullable=true)
      */
     protected $fileName;
+
+    /**
+     * @var
+     * @ORM\Column(name="url", type="text", nullable=true)
+     */
+    protected $url;
 
     /**
      * Sets file.
@@ -366,7 +372,6 @@ class Ad
         }
     }
 
-
     /**
      * This function is used to get object class name
      *
@@ -375,6 +380,47 @@ class Ad
     public function getClassName(){
 
         return get_class($this);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+
+    /**
+     */
+    public function checkDataProvider(ExecutionContextInterface $context)
+    {
+        if($this->getCode() != null && ($this->getUrl() != null || $this->getFileName() != null )){
+            $context->buildViolation('Code value {{ value }} is invalid. Code can`t added while file or url is not empty.')
+                ->atPath('code')
+                ->setParameter('{{ value }}', $this->getCode())
+                ->addViolation();
+        }
+        elseif($this->getCode() == null && $this->getUrl() != null && $this->getDownloadLink() == null ) {
+            $context->buildViolation('The value {{ value }} is invalid. File cannot be null while url is not empty.')
+                ->atPath('file')
+                ->setParameter('{{ value }}', $this->getFile())
+                ->addViolation();
+        }
+        elseif($this->getCode() == null && $this->getUrl() == null && $this->getFileName() != null) {
+            $context->buildViolation(' The value {{ value }} is invalid. Url cannot be empty while file is not empty.')
+                ->atPath('url')
+                ->setParameter('{{ value }}', $this->getUrl())
+                ->addViolation();
+        }
     }
 
 }

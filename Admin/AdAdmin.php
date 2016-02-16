@@ -42,6 +42,7 @@ class AdAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
+            ->add('url')
             ->add('dimensionIndex')
         ;
     }
@@ -54,11 +55,11 @@ class AdAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->addIdentifier('code')
+            ->addIdentifier('url')
             ->addIdentifier('dimensionIndex')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
-                    'show' => array(),
                     'delete' => array()
                 )
             ))
@@ -71,26 +72,30 @@ class AdAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->tab('General')
+            ->with('General')
             ->add('name')
-            ->add('code', 'textarea', array('required' => false))
-            ->add('dimensionIndex', 'number', array('required' => false))
-            ->add('file', 'ad_file_type', array('required' => false))
-            ->setHelps(array(
-                'dimensionIndex' => 'Set the google <a href="https://support.google.com/analytics/answer/6164990?hl=en" target="_blank"> Analytics dimension </a>index of a ad page',
-            ))
+                ->add('dimensionIndex', 'number', array('required' => false))
+                ->end()
+            ->end()
+            ->tab('Ad code data')
+            ->with('Ad code data')
+                ->add('code', 'textarea', array('required' => false))
+                ->end()
+            ->end()
+            ->tab('Custom Ad data')
+            ->with('Custom Ad data')
+                ->add('url', 'url', array('required' => false))
+                ->add('file', 'ad_file_type', array('required' => false, 'label'=>'Ad image'))
+                ->end()
+            ->end()
+                ->setHelps(array(
+                    'dimensionIndex' => 'Set the google <a href="https://support.google.com/analytics/answer/6164990?hl=en" target="_blank"> Analytics dimension </a>index of a ad page',
+                    'url' => 'This field url of custom ad',
+                    'file' => 'This field image of custom ad',
+                    'code' => 'This field code of Ad ',
+                ))
 
-        ;
-    }
-
-    /**
-     * @param ShowMapper $showMapper
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-        $showMapper
-            ->add('name')
-            ->add('codes')
-            ->add('dimensionIndex')
         ;
     }
 
