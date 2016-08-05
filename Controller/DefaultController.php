@@ -24,8 +24,18 @@ class DefaultController extends Controller
 
         // set data for profiler
         $this->container->get('data_collector.ad_collector')->addData($domain, $zone, $data);
+
         // return data
-        return array('ads' => $data, 'zone' => $zone);
+        $response = $this->render('LSoftAdBundle:Default:index.html.twig', ['ads' => $data, 'zone' => $zone]);
+
+        // caching
+        $lifetime = $this->getParameter('l_soft_ad.lifetime');
+
+        if($lifetime){
+            $response->setSharedMaxAge($lifetime);
+        }
+
+        return $response;
     }
 
     /**
